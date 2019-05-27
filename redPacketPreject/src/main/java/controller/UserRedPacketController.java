@@ -24,19 +24,19 @@ public class UserRedPacketController {
     @Autowired
     private UserRedPacketService userRedPacketService;
 
-    @RequestMapping(value = "/grabRedPacket",method = RequestMethod.POST)
+    @RequestMapping(value = "/grabRedPacket", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> grabRedPacket(Long redPacketId, Long userId){
+    public Map<String, Object> grabRedPacket(Long redPacketId, Long userId) {
         int result = userRedPacketService.grabRedPacketForVersion(redPacketId, userId);
-        Map<String,Object> retMap = new HashMap<>(2);
+        Map<String, Object> retMap = new HashMap<>(2);
         boolean flag = result > 0;
-        retMap.put("success",flag);
+        retMap.put("success", flag);
         retMap.put("message", flag ? "抢红包成功" : "抢红包失败");
         return retMap;
     }
 
     @RequestMapping(value = "/redPacketPage", method = RequestMethod.GET)
-    public ModelAndView redPacketPage(){
+    public ModelAndView redPacketPage() {
         ModelAndView mv = new ModelAndView();
         mv.setViewName("grabRedPacketPage");
         return mv;
