@@ -1,0 +1,113 @@
+gitlab  https://git.souche-inc.com/liujiayuan/spring-framework
+官方文档 https://docs.spring.io/spring/docs/5.1.0.RELEASE/
+
+学习计划
+1. 对应的组件、包（整理出思路），11.4-11.8
+2. 容器初始化过程（一个月，11.11-12.11）
+3. 后面的部分根据第一阶段的进度调整
+    bean生命周期
+    aop
+    mvc
+    事务
+
+
+输出要求
+1. 总结输出，文档，每个部分完成输出一篇总结文档
+2. 实践：
+    每个部分至少三个
+    识别好的代码
+    寻找使用场景
+    应用到场景中
+3. 组内分享
+
+
+
+-- 包结构
+    -- 核心容器
+        -- core ：主要包含Spring框架基本的核心工具类
+        -- beans：包含访问配置文件，创建和管理bean，以及进行Ioc/DI操作相关的类
+        -- context：在core和beans基础上构建，提供对象访问方法。支持国际化、事件传播、资源加载和对Context的透明创建
+        -- expression language：提供表达式语言，用于在运行时查询和操纵对象
+
+   -- Data Access/Integration
+        -- JDBC：Spring对JDBC数据访问进行封装的类
+        -- ORM：对象关系映射API
+        -- OXM：提供一个对Object/XML映射实现的抽象层
+        -- JMS：准要包含一些制造和消费消息的特性
+        -- Transaction：支持编程和声明式事物管理
+
+   -- Web
+        -- web：提供了基础的面向web的特性。
+        -- webmvc：包含Spring的model-view-controller实现
+   -- aop
+        -- 提供一个符合AOP联盟标准的面向切面编程的实现
+
+   -- test
+        -- 支持使用JUnit和TestNG对Spring组件进行测试
+
+
+IOC
+
+AOP
+容器
+上下文
+beanFactory
+BeanDefinition
+postProcessor
+lifeCycle
+aware
+beanFactory 和 FactoryBean区别
+
+
+-- ----- ----- ----- ----- ----- ---
+问题:
+张鹏
+1.BeanDefinition 是什么?为什么要有这个?这个对我们写代码有什么借鉴意义
+    Spring容器启动时读取配置信息将各种bean的基本配置信息读取到对应BeanDefinition，用于生成bean时调用。所以BeanDefinition就像是一个存储了特定信息的模版文件；
+    如果没有BeanDefinition就变成一边解析一边创建，而且用到bean配置信息的地方需要再次解析。
+    Spring创建bean的过程比较复杂而且bean之间有相互依赖，通过BeanDefinition让用户可以简单的配置bean参数而不用管复杂的创建过程。这里用到了外观模式，通过一个接口，将内部复杂的实现隐藏，对外客户端暴露简单的接口，实现了解耦。比如我们的下单接口调用方只需要传一个简单的param
+
+2.从容器角度,将了解到的概念,用一个简单直接的话或图描述
+
+
+
+阮天炜
+1. 已知Spring可以解决单例模式，属性中循环依赖，Setter注入的循环依赖问题，但是为什么Spring只能解决这个特定的依赖问题，解决它所用到的原理大致介绍一下。
+2. Spring的lookup-method 和 replace-method 用的不多，但是也有一定的应用场景。简单说一下我们实际可以运用的场景。
+
+
+刘佳缘
+1、Spring起来后有几个spring容器？只有一个吗？
+2、BeanDefinitionRegistryPostProcessor、BeanFactoryPostProcessor、BeanPostProcessor（这个没看到可以先留着）在什么时候触发？
+    1、BeanDefinitionRegistryPostProcessor
+    2、BeanFactoryPostProcessor
+    3、BeanPostProcessor在实例化bean前后调用
+3、BeanDefinitionRegistryPostProcessor、BeanFactoryPostProcessor 触发是否有顺序，如果有顺序，那么是以怎么样的顺序进行触发的？
+
+高劲松
+1:BeanFactory和ApplicationContext的区别
+    BeanFactory是Spring最底层的接口提供了bean的实例化和获取bean的功能。
+    ApplicationContext继承BeanFactory处理提供基础功能还继承其它类扩展了更多功能：
+        MessageSource：国际化
+        ResourcePatternResolver：访问资源
+        ApplicationEventPublisher：消息发送响应
+        HierarchicalBeanFactory：载入多个（有继承关系）上下文 ，使得每一个上下文都专注于一个特定的层次，比如应用的web层
+        EnvironmentCapable：获得一个Environment实例
+
+
+2:ApplicationContext 上下文的生命周期
+
+
+李星
+1.spring提供的BeanPostProcessor主要有哪些？各自的作用
+2.spring的监听器是怎么注册的？在何时注册的？
+3.spring事件监听的实现原理
+
+
+彭登旺：
+1、连接点(Joint Point)和切入点(Point cut)是什么？
+2、什么是织入(weaving)？
+
+陈新客
+1. spring容器的初始化到哪一步算是初始化完成？预实例化bean的初始化和容器的初始化顺序？
+2. 为什么不能用@Autowired给静态字段进行依赖注入？

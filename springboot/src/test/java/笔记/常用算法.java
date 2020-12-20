@@ -56,7 +56,7 @@ public class 常用算法 {
     public int binarySearch(int[] arr, int search) {
         if (arr != null && arr.length > 0) {
             int left = 0;
-            int right = arr.length - 1;、
+            int right = arr.length - 1;
             int mid = (left + right) / 2;
             while (arr[mid] != search) {
                 if (arr[mid] < search) {
